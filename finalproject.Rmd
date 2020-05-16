@@ -112,3 +112,15 @@ test %>%
   slice(1:50)
 
 ```
+
+Tidy data
+To make further analysis, We need to tidy data since there is some misunderstanding data and missing data. First we need to take care that the ratio of Sao Tome and Principe is larger than 1. How can Cases_per_1M_pop be larger than Tests_per_1M_pop? Maybe this region don't have enough Nucleic Acid Detection Kit but some people have obvious symptoms of coronavirus so they are counted into cases. It shows its very weak test conditions. But we leave this data alone temporarily. Second, this data base miss some data of some countries so that we delete these countries' data for accuracy of analysis.
+```{r}
+test <- test %>%
+  filter(!is.na(Cases_per_1M_pop)) %>%
+  filter(!is.na(Deaths_per_1M_pop)) %>%
+  filter(!is.na(Total_Tests)) %>%
+  filter(!is.na(Tests_per_1M_pop)) %>%
+  filter(!is.na(ratio)) 
+test
+```
